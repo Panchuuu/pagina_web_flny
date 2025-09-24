@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Carrito 🛒</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style/style.css">
+  <link rel="icon" type="image/png" href="assets/img/logo_tienda.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="banner-logo">
+      <a class="navbar-brand d-none d-lg-block" href="index.html">
+        <img src="assets/img/logo_tienda.png" alt="Sekai no Manga" height="150px">
+      </a>
+    </div>  
+    <br>
+  <nav class="navbar navbar-expand-lg border-bottom">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link"  href="catalogo.html">Catálogo</a></li>
+          <li class="nav-item"><a class="nav-link" target="_blank" href="ofertas.html">Ofertas</a></li>
+          <li class="nav-item"><a class="nav-link" target="_blank" href="vendidos.html">¡Más vendidos!</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+
+  <div class="items-carro container my-4">
+    <h2 class="text-center">Carro de Compras</h2>
+
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <div class="table-responsive" style="max-width: 900px;">
+          <table id="tabla" class="table table-bordered table-striped align-middle mb-0">
+            <thead class="table-light text-center">
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Subtotal</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-productos"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="container py-4">
+    <div class="row g-4">
+      <div class="col-12 col-md-6">
+        <section class="seccion1">
+          <h3 class="h5 mb-3">Costo estimado de envío</h3>
+
+          <div class="mb-3">
+            <label for="region" class="form-label">Región</label>
+            <select id="region" class="form-select">
+              <option value="Region_metropolitana">RM</option>
+              <option value="Valparaíso">Valparaíso</option>
+              <option value="Aysén">Aysén</option>
+              <option value="Región-de-Arica-y-Parinacota">Región de Arica y Parinacota</option>
+              <option value="Tarapacá">Tarapacá</option>
+              <option value="Atacama">Atacama</option>
+              <option value="Coquimbo">Coquimbo</option>
+              <option value="el-maule">Maule</option>
+              <option value="Ñuble">Ñuble</option>
+              <option value="Biobío">Biobío</option>
+              <option value="Los-Ríos">Los Ríos</option>
+              <option value="Región-de-Los-Lagos">Región de Los Lagos</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="comuna" class="form-label">Comuna</label>
+            <select id="comuna" class="form-select">
+              <option value="centro">Centro</option>
+              <option value="periferia">Sur</option>
+              <option value="periferia">Norte</option>
+            </select>
+          </div>
+
+          <button id="btnEnvio" class="btn btn-primary">Calcular envío</button>
+
+       
+          <div id="envioMensaje" class="mt-3"></div>
+    
+        </section>
+      </div>
+
+  
+      <div class="col-12 col-md-6">
+        <section>
+          <h3 class="h5 mb-3">Código de descuento</h3>
+
+          <div class="input-group mb-2">
+            <input id="cupon" type="text" class="form-control" placeholder="p.ej. LANZAMIENTO10" />
+            <button id="btnCupon" class="btn btn-outline-secondary">Aplicar</button>
+          </div>
+          <div id="cuponMensaje"></div>
+        </section>
+      </div>
+
+  
+      <div class="col-12">
+        <section>
+          <h3 class="h5 mb-3">Revisión del pedido</h3>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="row gy-2">
+                <div class="col-6 col-md-3 d-flex justify-content-between">
+                  <span class="text-muted">SUBTOTAL:</span>
+                  <span id="lblSubtotal" class="fw-semibold">$0</span>
+                </div>
+                <div class="col-6 col-md-3 d-flex justify-content-between">
+                  <span class="text-muted">ENVÍO:</span>
+                  <span id="lblEnvio" class="fw-semibold">$0</span>
+                </div>
+                <div class="col-6 col-md-3 d-flex justify-content-between">
+                  <span class="text-muted">DESCUENTO:</span>
+                  <span id="lblDescuento" class="fw-semibold">$0</span>
+                </div>
+                <div class="col-6 col-md-3 d-flex justify-content-between">
+                  <strong>TOTAL:</strong>
+                  <strong id="lblTotal">$0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <button id="btnPagar">PROCEDER AL PAGO</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> 
+      <p class="col-md-4 mb-0 text-body-secondary">© 2025 Sekai no Manga, SPA</p> 
+      <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap"> 
+        <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+          <img class ="bi me-2" src="assets/img/logo_tienda.png" alt="Logo tienda" width="60" height="100" aria-hidden="true">
+        </svg> 
+      </a> 
+      <ul class="nav col-md-4 justify-content-end"> 
+        <li class="nav-item">
+          <a href="index.html" class="nav-link px-2 text-body-secondary">Inicio</a>
+        </li> 
+        <li class="nav-item">
+          <a href="quienes.html" class="nav-link px-2 text-body-secondary">Quienes somos</a>
+        </li> 
+        <li class="nav-item">
+          <a href="terminos.html" class="nav-link px-2 text-body-secondary">Términos y Condiciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2 text-body-secondary">Redes</a>
+        </li>
+        <li class="nav-item">
+          <a href="https://www.instagram.com/" class="nav-link px-2 text-body-secondary">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="https://web.whatsapp.com/" class="nav-link px-2 text-body-secondary">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="https://www.tiktok.com/es/" class="nav-link px-2 text-body-secondary">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </li>
+      </ul> 
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/carro.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+body {
+  font-family: 'Inter', 'Open Sans';
+}
+
+.banner-logo {
+  text-align: center;
+  background-image: url('../img/banner.gif');
+  background-position: center;
+  background-size: cover;
+  padding: 20px 0;
+}
+
+.banner-logo .logoT {
+  border-radius: 50%;
+  border: 5px solid rgb(255, 196, 0);
+  background-color: white;
+}
+
+.banner-envio {
+  text-align: center;
+  background-color: rgb(250, 194, 11);
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#btnPagar:hover {
+  color: white;
+  background-color: green;
+}
+
+.btn-remove:hover {
+  color: white;
+  background-color: red;
+}
+
+.txtHome {
+  text-align: center;
+}
+
+.txtOferta {
+  text-align: center;
+}
+
+.txtVendidos {
+  text-align: center;
+}
+
+.txtCatalogo {
+  text-align: center;
+}
+
+.catalog-grid .card { width: 100%; }
+
+.catalog-grid .card.h-100 { display: flex; flex-direction: column; }
+.catalog-grid .card .card-body { display: flex; flex-direction: column; }
+
+/* Todas las portadas con misma “ventana” 3:4, recorte sin deformar */
+.catalog-grid .card .card-img-top{
+  width: 100%;
+  aspect-ratio: 3 / 4;   /* Cambia a 1 / 1 si quieres cuadradas */
+  object-fit :cover
+}
+
+/* Títulos con el mismo tamaño y alto visual (2 líneas máx.) */
+.catalog-grid .card .card-title{
+  font-size: 1rem;         /* mismo tamaño en todas */
+  line-height: 1.3;
+  min-height: 2.6rem;      /* ~2 líneas */
+  margin-bottom: 0.5rem;
+
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.login-user {
+  text-align: center;
+}
