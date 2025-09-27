@@ -1,78 +1,141 @@
+/* ---- FUENTES Y ESTILOS BASE ---- */
 body {
-  font-family: 'Inter', 'Open Sans';
+    font-family: 'Inter', sans-serif;
+    background-color: #121212;
 }
 
-.banner-logo {
-  text-align: center;
-  background-image: url('../img/banner.gif');
-  background-position: center;
-  background-size: cover;
-  padding: 20px 0;
+h1, h2, h3, h4, h5, .navbar-brand, .card-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
-.banner-logo .logoT {
-  border-radius: 50%;
-  border: 5px solid rgb(255, 196, 0);
-  background-color: white;
+/* ---- COMPONENTES PRINCIPALES ---- */
+.hero-section {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-bottom: 2px solid #ffc107;
 }
 
-.banner-envio {
-  text-align: center;
-  background-color: rgb(250, 194, 11);
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+.hero-section .lead {
+    color: #e0e0e0;
 }
 
-#btnPagar:hover {
-  color: white;
-  background-color: green;
+.navbar {
+    backdrop-filter: blur(10px);
 }
 
-.btn-remove:hover {
-  color: white;
-  background-color: red;
+.nav-link {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #f0f0f0;
+    transition: color 0.3s ease;
 }
 
-.txtHome {
-  text-align: center;
+.nav-link:hover, .nav-link.active {
+    color: #ffc107;
 }
 
-.txtOferta {
-  text-align: center;
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-width: 2px;
 }
 
-.txtVendidos {
-  text-align: center;
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2);
 }
 
-.txtCatalogo {
-  text-align: center;
+.bg-dark-secondary {
+    background-color: #1e1e1e !important;
 }
 
-.catalog-grid .card { width: 100%; }
-
-.catalog-grid .card.h-100 { display: flex; flex-direction: column; }
-.catalog-grid .card .card-body { display: flex; flex-direction: column; }
-
-/* Todas las portadas con misma “ventana” 3:4, recorte sin deformar */
-.catalog-grid .card .card-img-top{
-  width: 100%;
-  aspect-ratio: 3 / 4;   /* Cambia a 1 / 1 si quieres cuadradas */
-  object-fit :cover
+.card ul li {
+    padding-bottom: 0.5rem;
 }
 
-/* Títulos con el mismo tamaño y alto visual (2 líneas máx.) */
-.catalog-grid .card .card-title{
-  font-size: 1rem;         /* mismo tamaño en todas */
-  line-height: 1.3;
-  min-height: 2.6rem;      /* ~2 líneas */
-  margin-bottom: 0.5rem;
-
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* ---- FOOTER ---- */
+.text-muted-dark {
+    color: #a0a0a0;
 }
 
-.login-user {
-  text-align: center;
+.footer-link-simple {
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+}
+
+.footer-link-simple:hover {
+    color: #ffc107;
+}
+
+/* ---- CARRO DE COMPRAS Y CONTADOR ---- */
+.cart-item-img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-counter-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: #ffc107;
+    color: #121212;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---- CORRECCIONES GLOBALES Y DE ESPECIFICIDAD DE COLORES ---- */
+body.bg-dark {
+    color: #e9ecef; /* Un blanco suave para todo el texto por defecto */
+}
+
+a {
+    color: #ffc107; /* Amarillo para los enlaces */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff; /* Blanco al pasar el mouse */
+    text-decoration: underline;
+}
+
+/* Forzar color claro en los párrafos del resumen del carro */
+.card-body .d-flex p {
+    color: #adb5bd; /* Gris claro */
+}
+
+/* Forzar color blanco en el texto "TOTAL" que es más grueso */
+.card-body .d-flex .fw-bold {
+    color: #f8f9fa !important; /* Blanco, !important para asegurar que se aplique */
+}
+
+/* Forzar color amarillo en el precio total final */
+.card-body .d-flex .text-warning {
+    color: #ffc107 !important;
+}
+
+/* Estilo para el texto de descuento y el botón "Quitar" */
+.text-success {
+    color: #28a745 !important; /* Verde para el texto del cupón */
+}
+
+.btn-link.text-danger {
+    color: #dc3545 !important; /* Rojo para el botón "Quitar" */
+    text-decoration: none;
+}
+
+/* ---- CORRECCIÓN DE COLOR PARA LA DESCRIPCIÓN DEL MODAL ---- */
+.modal-body p.text-muted {
+    color: #adb5bd !important; /* Un gris claro, !important para asegurar el cambio */
+}
+
+.bg-dark-secondary .text-muted {
+    color: #adb5bd !important; /* Un gris claro. El !important es para darle máxima prioridad. */
 }

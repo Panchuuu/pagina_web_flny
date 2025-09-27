@@ -1,193 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Carrito 🛒</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style/style.css">
-  <link rel="icon" type="image/png" href="assets/img/logo_tienda.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carro de Compras - Flaites NY 🗽</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="icon" type="image/png" href="assets/img/logo_tienda.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
-<body>
-    <div class="banner-logo">
-      <a class="navbar-brand d-none d-lg-block" href="index.html">
-        <img src="assets/img/logo_tienda.png" alt="Sekai no Manga" height="150px">
-      </a>
-    </div>  
-    <br>
-  <nav class="navbar navbar-expand-lg border-bottom">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<body class="bg-dark text-white">
 
-      <div class="collapse navbar-collapse justify-content-center" id="mainNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link"  href="catalogo.html">Catálogo</a></li>
-          <li class="nav-item"><a class="nav-link" target="_blank" href="ofertas.html">Ofertas</a></li>
-          <li class="nav-item"><a class="nav-link" target="_blank" href="vendidos.html">¡Más vendidos!</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <br>
-
-  <div class="items-carro container my-4">
-    <h2 class="text-center">Carro de Compras</h2>
-
-    <div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <div class="table-responsive" style="max-width: 900px;">
-          <table id="tabla" class="table table-bordered table-striped align-middle mb-0">
-            <thead class="table-light text-center">
-              <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio unitario</th>
-                <th>Subtotal</th>
-                <th>Eliminar</th>
-              </tr>
-            </thead>
-            <tbody id="tbody-productos"></tbody>
-          </table>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
         </div>
-      </div>
-    </div>
-  </div>
 
-  <br>
-  <div class="container py-4">
-    <div class="row g-4">
-      <div class="col-12 col-md-6">
-        <section class="seccion1">
-          <h3 class="h5 mb-3">Costo estimado de envío</h3>
-
-          <div class="mb-3">
-            <label for="region" class="form-label">Región</label>
-            <select id="region" class="form-select">
-              <option value="Region_metropolitana">RM</option>
-              <option value="Valparaíso">Valparaíso</option>
-              <option value="Aysén">Aysén</option>
-              <option value="Región-de-Arica-y-Parinacota">Región de Arica y Parinacota</option>
-              <option value="Tarapacá">Tarapacá</option>
-              <option value="Atacama">Atacama</option>
-              <option value="Coquimbo">Coquimbo</option>
-              <option value="el-maule">Maule</option>
-              <option value="Ñuble">Ñuble</option>
-              <option value="Biobío">Biobío</option>
-              <option value="Los-Ríos">Los Ríos</option>
-              <option value="Región-de-Los-Lagos">Región de Los Lagos</option>
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="comuna" class="form-label">Comuna</label>
-            <select id="comuna" class="form-select">
-              <option value="centro">Centro</option>
-              <option value="periferia">Sur</option>
-              <option value="periferia">Norte</option>
-            </select>
-          </div>
-
-          <button id="btnEnvio" class="btn btn-primary">Calcular envío</button>
-
-       
-          <div id="envioMensaje" class="mt-3"></div>
-    
-        </section>
-      </div>
-
-  
-      <div class="col-12 col-md-6">
-        <section>
-          <h3 class="h5 mb-3">Código de descuento</h3>
-
-          <div class="input-group mb-2">
-            <input id="cupon" type="text" class="form-control" placeholder="p.ej. LANZAMIENTO10" />
-            <button id="btnCupon" class="btn btn-outline-secondary">Aplicar</button>
-          </div>
-          <div id="cuponMensaje"></div>
-        </section>
-      </div>
-
-  
-      <div class="col-12">
-        <section>
-          <h3 class="h5 mb-3">Revisión del pedido</h3>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="row gy-2">
-                <div class="col-6 col-md-3 d-flex justify-content-between">
-                  <span class="text-muted">SUBTOTAL:</span>
-                  <span id="lblSubtotal" class="fw-semibold">$0</span>
-                </div>
-                <div class="col-6 col-md-3 d-flex justify-content-between">
-                  <span class="text-muted">ENVÍO:</span>
-                  <span id="lblEnvio" class="fw-semibold">$0</span>
-                </div>
-                <div class="col-6 col-md-3 d-flex justify-content-between">
-                  <span class="text-muted">DESCUENTO:</span>
-                  <span id="lblDescuento" class="fw-semibold">$0</span>
-                </div>
-                <div class="col-6 col-md-3 d-flex justify-content-between">
-                  <strong>TOTAL:</strong>
-                  <strong id="lblTotal">$0</strong>
-                </div>
-              </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-opacity-75 bg-dark border-bottom border-secondary sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html">Tienda VIP</a></li>
+                    <li class="nav-item"><a class="nav-link" href="normativas.html">Normativas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://discord.com/tu-servidor" target="_blank">Discord</a></li>
+                </ul>
             </div>
-          </div>
-        </section>
-      </div>
-      <button id="btnPagar">PROCEDER AL PAGO</button>
+            <div class="d-flex align-items-center">
+                <div id="guest-container" class="d-flex align-items-center">
+                    <a href="login.html" class="me-3" title="Mi Cuenta"><img src="assets/img/login-user.png" alt="user" style="height: 24px" /></a>
+                </div>
+                <div id="user-container" class="d-flex align-items-center" style="display: none;">
+                    <span class="navbar-text me-3">Hola, <span id="username-span" class="fw-bold"></span></span>
+                    <button class="btn btn-outline-danger btn-sm" onclick="handleLogout()">Salir</button>
+                </div>
+                <a href="carro.html" class="position-relative ms-3" title="Ver carro">
+                    <img src="assets/img/carrito-de-compras.png" alt="carro" style="height:24px;">
+                    <span id="cart-counter" class="cart-counter-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <h2 class="text-center fw-bold mb-5 text-uppercase">Tu Carro de Compras</h2>
+        <div class="row">
+            <div class="col-lg-8" id="cart-items-container">
+                </div>
+            <div class="col-lg-4">
+                <div class="card bg-dark-secondary border-secondary sticky-top" style="top: 100px;">
+                    <div class="card-body p-4">
+                        <h4 class="card-title text-uppercase fw-bold mb-4">Resumen del Pedido</h4>
+                        <div id="cart-summary"></div>
+                        <hr class="border-secondary">
+                        <div id="coupon-area">
+                            <div class="input-group">
+                                <input type="text" id="coupon-input" class="form-control bg-dark text-white border-secondary" placeholder="Código de cupón">
+                                <button class="btn btn-outline-warning" type="button" onclick="applyCoupon()">Aplicar</button>
+                            </div>
+                            <div id="coupon-message" class="mt-2 small"></div> 
+                        </div>
+                        <div class="mt-4">
+                            <div id="paypal-button-container"></div>
+                            <div id="payment-message-container" class="text-center"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-secondary">
+            <p class="col-md-4 mb-0 text-muted-dark">© 2024 Flaites NY Roleplay</p>
+            <a href="index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+                <img src="assets/img/logo_tienda.png" alt="Logo Flaites NY" width="50" />
+            </a>
+            <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item"><a href="terminos.html" class="nav-link px-2 footer-link-simple">Términos</a></li>
+                <li class="nav-item"><a href="https://discord.com/tu-servidor" target="_blank" class="nav-link px-2 footer-link-simple" title="Discord"><i class="fab fa-discord fa-lg"></i></a></li>
+                <li class="nav-item"><a href="https://www.instagram.com/" target="_blank" class="nav-link px-2 footer-link-simple" title="Instagram"><i class="fab fa-instagram fa-lg"></i></a></li>
+                <li class="nav-item"><a href="https://www.tiktok.com/es/" target="_blank" class="nav-link px-2 footer-link-simple" title="TikTok"><i class="fab fa-tiktok fa-lg"></i></a></li>
+            </ul>
+        </footer>
     </div>
-  </div>
 
-  <div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> 
-      <p class="col-md-4 mb-0 text-body-secondary">© 2025 Sekai no Manga, SPA</p> 
-      <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap"> 
-        <svg class="bi me-2" width="40" height="32" aria-hidden="true">
-          <img class ="bi me-2" src="assets/img/logo_tienda.png" alt="Logo tienda" width="60" height="100" aria-hidden="true">
-        </svg> 
-      </a> 
-      <ul class="nav col-md-4 justify-content-end"> 
-        <li class="nav-item">
-          <a href="index.html" class="nav-link px-2 text-body-secondary">Inicio</a>
-        </li> 
-        <li class="nav-item">
-          <a href="quienes.html" class="nav-link px-2 text-body-secondary">Quienes somos</a>
-        </li> 
-        <li class="nav-item">
-          <a href="terminos.html" class="nav-link px-2 text-body-secondary">Términos y Condiciones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-2 text-body-secondary">Redes</a>
-        </li>
-        <li class="nav-item">
-          <a href="https://www.instagram.com/" class="nav-link px-2 text-body-secondary">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </li> 
-        <li class="nav-item">
-          <a href="https://web.whatsapp.com/" class="nav-link px-2 text-body-secondary">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="https://www.tiktok.com/es/" class="nav-link px-2 text-body-secondary">
-            <i class="fab fa-tiktok"></i>
-          </a>
-        </li>
-      </ul> 
-    </footer>
-  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/auth.js"></script>
+    
+    <script src="https://www.paypal.com/sdk/js?client-id=AcecErknNJvoDLtDQcowhug1mwogi7GzHFfcYu0xxLxJAyRWGz87xojyGRZiQVmvBq28lN0gLxvDBmNe&currency=USD&disable-funding=credit,card"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/carro.js"></script>
+    <script>
+        function initPayPalButtons() {
+            const totalCLPElement = document.getElementById('cart-total-value');
+            const payPalContainer = document.getElementById('paypal-button-container');
+            const messageContainer = document.getElementById('payment-message-container');
+            payPalContainer.innerHTML = '';
+            messageContainer.innerHTML = '';
+            if (!totalCLPElement || !totalCLPElement.textContent) { return; }
+            const totalCLP = parseFloat(totalCLPElement.textContent);
+            if (totalCLP <= 0) {
+                messageContainer.innerHTML = '<p class="text-muted small">No se puede proceder al pago cuando el total es $0.</p>';
+            } else {
+                const exchangeRate = 950;
+                const totalUSD = (totalCLP / exchangeRate).toFixed(2);
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({ purchase_units: [{ description: 'Compra en Tienda Flaites NY', amount: { value: totalUSD } }] });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            alert('¡Pago completado con éxito por ' + details.payer.name.given_name + '!');
+                            clearCartAfterPayment();
+                        });
+                    },
+                    onError: function(err) {
+                        console.error('Ocurrió un error en el pago:', err);
+                        alert('El pago no pudo ser procesado. Por favor, inténtalo de nuevo.');
+                    }
+                }).render('#paypal-button-container');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCounter();
+            if (window.location.pathname.includes('carro.html')) {
+                loadCart();
+                initPayPalButtons();
+            }
+        });
+    </script>
 </body>
 </html>
