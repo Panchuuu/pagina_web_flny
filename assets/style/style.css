@@ -139,3 +139,88 @@ a:hover {
 .bg-dark-secondary .text-muted {
     color: #adb5bd !important; /* Un gris claro. El !important es para darle máxima prioridad. */
 }
+
+/* ---- PANEL DE ESTADO DEL SERVIDOR ---- */
+.server-status-panel {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-online {
+    color: #28a745; /* Verde */
+    font-weight: bold;
+}
+
+.status-offline {
+    color: #dc3545; /* Rojo */
+    font-weight: bold;
+}
+
+.status-loading {
+    color: #ffc107; /* Amarillo */
+}
+
+/* ======================================================= */
+/* ESTILOS PARA LA PÁGINA DE PERFIL */
+/* ======================================================= */
+
+/* Estilo mejorado para la tabla de historial */
+.table {
+    --bs-table-border-color: #444; /* Bordes de tabla más sutiles */
+}
+
+.table thead {
+    /* Línea de acento amarilla en la cabecera de la tabla */
+    border-bottom: 3px solid #ffc107;
+}
+
+.table th {
+    text-transform: uppercase;
+    color: #ffc107;
+    font-size: 0.9rem;
+}
+
+.table tbody tr:hover {
+    /* Efecto de hover sutil para las filas de la tabla */
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+
+.auth-page {
+    /* Fondo con imagen temática y un overlay oscuro */
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.auth-card {
+    /* Efecto "Glassmorphism" o cristal esmerilado */
+    background-color: rgba(30, 30, 30, 0.65);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem; /* Bordes más redondeados */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.auth-card .form-control {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: #444;
+}
+
+.auth-card .form-control:focus {
+    /* Efecto de foco con el color de acento amarillo */
+    border-color: #ffc107;
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+.badge {
+    padding: 0.5em 0.75em;
+    font-size: 0.8rem;
+}

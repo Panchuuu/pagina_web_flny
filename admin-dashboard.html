@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Flaites NY</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="icon" type="image/png" href="assets/img/logo_tienda.png" />
+</head>
+<body class="bg-dark text-white">
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-secondary border-bottom border-secondary sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse w-100" id="mainNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item" id="admin-link" style="display: none;">
+                        <a class="nav-link active text-danger fw-bold" href="admin-dashboard.html">Admin</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html">Tienda VIP</a></li>
+                    <li class="nav-item"><a class="nav-link" href="normativas.html">Normativas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://discord.com/tu-servidor" target="_blank">Discord</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div id="guest-container"><a href="login.html" class="btn btn-outline-warning btn-sm">Iniciar Sesión</a></div>
+                    <div id="user-container" class="dropdown" style="display: none;">
+                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-2"></i> Hola, <span id="username-span" class="fw-bold ms-1"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            <li><a class="dropdown-item" href="perfil.html"><i class="fas fa-history me-2"></i>Ver historial de compras</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><button class="dropdown-item text-danger" onclick="handleLogout()"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</button></li>
+                        </ul>
+                    </div>
+                    <a href="carro.html" class="position-relative ms-3" title="Ver carro">
+                        <img src="assets/img/carrito-de-compras.png" alt="carro" style="height:24px;">
+                        <span id="cart-counter" class="cart-counter-badge">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <h2 class="text-uppercase fw-bold mb-4">Panel de Administración</h2>
+        
+        <ul class="nav nav-tabs nav-fill mb-4" id="adminTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-tab-pane" type="button" role="tab">Dashboard</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users-tab-pane" type="button" role="tab">Usuarios</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders-tab-pane" type="button" role="tab">Órdenes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="coupons-tab" data-bs-toggle="tab" data-bs-target="#coupons-tab-pane" type="button" role="tab">Cupones</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="adminTabContent">
+            <div class="tab-pane fade show active" id="dashboard-tab-pane" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card bg-dark-secondary h-100">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted text-uppercase">Usuarios Totales</h6>
+                                <h2 class="display-4 fw-bold" id="stats-total-users">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card bg-dark-secondary h-100">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted text-uppercase">Órdenes Totales</h6>
+                                <h2 class="display-4 fw-bold" id="stats-total-orders">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card bg-dark-secondary h-100">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted text-uppercase">Ingresos Totales (USD)</h6>
+                                <h2 class="display-4 fw-bold" id="stats-total-revenue">$0.00</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="users-tab-pane" role="tabpanel">
+                <div class="card bg-dark-secondary border-secondary">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th><th>Avatar</th><th>Usuario</th><th>Discord ID</th><th>Rol</th><th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="orders-tab-pane" role="tabpanel">
+                 <div class="card bg-dark-secondary border-secondary">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID Orden</th><th>Comprador</th><th>Regalo Para</th><th>Producto</th><th>Cantidad</th><th>Total (USD)</th><th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orders-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="coupons-tab-pane" role="tabpanel">
+                 <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card bg-dark-secondary border-secondary">
+                            <div class="card-header fw-bold text-uppercase">Crear Nuevo Cupón</div>
+                            <div class="card-body">
+                                <form id="createCouponForm">
+                                    <div class="mb-3"><label for="couponCode" class="form-label">Código</label><input type="text" class="form-control" id="couponCode" required placeholder="EJ: OFERTA20"></div>
+                                    <div class="mb-3"><label for="couponType" class="form-label">Tipo</label><select class="form-select" id="couponType"><option value="percent">Porcentaje (%)</option><option value="fixed">Monto Fijo ($)</option></select></div>
+                                    <div class="mb-3"><label for="couponValue" class="form-label">Valor</label><input type="number" class="form-control" id="couponValue" required placeholder="EJ: 20"></div>
+                                    <div class="mb-3"><label for="couponExpiry" class="form-label">Fecha de Vencimiento (Opcional)</label><input type="date" class="form-control" id="couponExpiry"></div>
+                                    <div class="d-grid"><button type="submit" class="btn btn-success">Crear Cupón</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                         <div class="card bg-dark-secondary border-secondary">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover mb-0">
+                                        <thead><tr><th>Código</th><th>Tipo</th><th>Valor</th><th>Vence el</th><th>Estado</th><th>Acciones</th></tr></thead>
+                                        <tbody id="coupons-table-body"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets.js/auth.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

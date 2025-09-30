@@ -14,8 +14,7 @@
 </head>
 <body class="bg-dark text-white">
 
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
-        </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100"></div>
 
     <header class="hero-section text-center py-5">
         <div class="container">
@@ -27,32 +26,42 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-opacity-75 bg-dark border-bottom border-secondary sticky-top">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
-                <ul class="navbar-nav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse w-100" id="mainNav">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                    <li class="nav-item" id="admin-link" style="display: none;"><a class="nav-link text-danger fw-bold" href="admin-dashboard.html">Admin</a></li>
                     <li class="nav-item"><a class="nav-link" href="catalogo.html">Tienda VIP</a></li>
                     <li class="nav-item"><a class="nav-link" href="normativas.html">Normativas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://discord.com/tu-servidor" target="_blank">Discord</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://discord.gg/T99hAzmP5A" target="_blank">Discord</a></li>
                 </ul>
-            </div>
-            <div class="d-flex align-items-center">
-                <a href="carro.html" class="position-relative ms-3" title="Ver carro">
-                    <img src="assets/img/carrito-de-compras.png" alt="carro" style="height:24px;">
-                    <span id="cart-counter" class="cart-counter-badge">0</span>
-                </a>
-                <div id="guest-container" class="d-flex align-items-center">
-                    <a href="login.html" class="me-3" title="Mi Cuenta"><img src="assets/img/login-user.png" alt="user" style="height: 24px" /></a>
-                </div>
-                <div id="user-container" class="d-flex align-items-center" style="display: none;">
-                    <span class="navbar-text me-3">Hola, <span id="username-span" class="fw-bold"></span></span>
-                    <button class="btn btn-outline-danger btn-sm" onclick="handleLogout()">Salir</button>
+                <div class="d-flex align-items-center">
+                    <div id="guest-container"><a href="login.html" class="btn btn-outline-warning btn-sm">Iniciar Sesión</a></div>
+                    <div id="user-container" class="dropdown" style="display: none;">
+                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-2"></i> Hola, <span id="username-span" class="fw-bold ms-1"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            <li><a class="dropdown-item" href="perfil.html"><i class="fas fa-history me-2"></i>Ver historial de compras</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><button class="dropdown-item text-danger" onclick="handleLogout()"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</button></li>
+                        </ul>
+                    </div>
+                    <a href="carro.html" class="position-relative ms-3" title="Ver carro">
+                        <img src="assets/img/carrito-de-compras.png" alt="carro" style="height:24px;">
+                        <span id="cart-counter" class="cart-counter-badge">0</span>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
+
+    <div class="container my-4">
+        <div class="server-status-panel">
+            <strong>ESTADO DEL SERVIDOR:</strong> <span id="server-status-text" class="status-loading">Cargando...</span> | 
+            <strong>JUGADORES:</strong> <span id="server-players-text">--/--</span>
+        </div>
+    </div>
 
     <main class="container my-5">
         <h2 class="text-center fw-bold mb-4 text-uppercase">Paquetes VIP Disponibles</h2>
@@ -69,10 +78,7 @@
                             <li>✅ Salario aumentado en un 10%.</li>
                             <li>✅ Kit de bienvenida mensual.</li>
                         </ul>
-                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails(
-                            'vip_bronze', 'VIP Bronce', 5000, 'assets/img/flny-vip-bronce.png', 
-                            'Obtén beneficios iniciales como fila de prioridad para entrar al servidor, acceso a un catálogo de vehículos exclusivos de nivel 1, un 10% de aumento en tu salario de trabajos y un kit de bienvenida cada mes.'
-                        )">Ver Detalles</button>
+                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails('vip_bronze', 'VIP Bronce', 5000, 'assets/img/flny-vip-bronce.png', 'Obtén beneficios iniciales como fila de prioridad para entrar al servidor, acceso a un catálogo de vehículos exclusivos de nivel 1, un 10% de aumento en tu salario de trabajos y un kit de bienvenida cada mes.')">Ver Detalles</button>
                     </div>
                 </div>
             </div>
@@ -88,10 +94,7 @@
                             <li>✅ Customización de personaje avanzada.</li>
                             <li>✅ Acceso a canal de Discord para VIPs.</li>
                         </ul>
-                        <button class="btn btn-outline-primary fw-bold mt-auto" onclick="showVipDetails(
-                            'vip_silver', 'VIP Plata', 10000, 'assets/img/flny-vip-plata.png', 
-                            'Incluye todos los beneficios de Bronce, además de acceso a vehículos de nivel 2, más opciones de personalización para tu personaje y entrada al canal exclusivo de Discord para la comunidad VIP.'
-                        )">Ver Detalles</button>
+                        <button class="btn btn-outline-primary fw-bold mt-auto" onclick="showVipDetails('vip_silver', 'VIP Plata', 10000, 'assets/img/flny-vip-plata.png', 'Incluye todos los beneficios de Bronce, además de acceso a vehículos de nivel 2, más opciones de personalización para tu personaje y entrada al canal exclusivo de Discord para la comunidad VIP.')">Ver Detalles</button>
                     </div>
                 </div>
             </div>
@@ -107,48 +110,55 @@
                             <li>✅ Posibilidad de crear tu propia banda.</li>
                             <li>✅ Soporte prioritario en Discord.</li>
                         </ul>
-                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails(
-                            'vip_gold', 'VIP Oro', 15000, 'assets/img/flny-vip-oro.png', 
-                            'El paquete definitivo. Obtén todos los beneficios de Plata, además de acceso a todas las skins de armas, la habilidad para fundar tu propia banda dentro del servidor y recibirás soporte prioritario en Discord.'
-                        )">Ver Detalles</button>
+                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails('vip_gold', 'VIP Oro', 15000, 'assets/img/flny-vip-oro.png', 'El paquete definitivo. Obtén todos los beneficios de Plata, además de acceso a todas las skins de armas, la habilidad para fundar tu propia banda dentro del servidor y recibirás soporte prioritario en Discord.')">Ver Detalles</button>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card h-100 bg-dark-secondary border-warning">
-                    <img src="assets/img/flny-vip-diamante.png" class="card-img-top" alt="VIP Diamante" />
+                    <img src="assets/img/flny-vip-oro.png" class="card-img-top" alt="VIP Oro" />
                     <div class="card-body d-flex flex-column text-white">
-                        <h5 class="card-title fw-bold">🗽 VIP Diamante</h5>
-                        <p class="card-text fs-4 fw-bold text-warning">$20.000 CLP / mes</p>
+                        <h5 class="card-title fw-bold">🗽 VIP Oro</h5>
+                        <p class="card-text fs-4 fw-bold text-warning">$15.000 CLP / mes</p>
                         <ul class="list-unstyled mt-3 mb-4">
-                            <li>✅ Todos los beneficios de Diamante.</li>
+                            <li>✅ Todos los beneficios de Plata.</li>
                             <li>✅ Acceso a todas las skins de armas.</li>
                             <li>✅ Posibilidad de crear tu propia banda.</li>
                             <li>✅ Soporte prioritario en Discord.</li>
                         </ul>
-                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails(
-                            'vip_diamond', 'VIP Diamante', 20000, 'assets/img/flny-vip-diamante.png', 
-                            'El paquete definitivo. Obtén todos los beneficios de Diamante, además de acceso a todas las skins de armas, la habilidad para fundar tu propia banda dentro del servidor y recibirás soporte prioritario en Discord.'
-                        )">Ver Detalles</button>
+                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails('vip_gold', 'VIP Oro', 15000, 'assets/img/flny-vip-oro.png', 'El paquete definitivo. Obtén todos los beneficios de Plata, además de acceso a todas las skins de armas, la habilidad para fundar tu propia banda dentro del servidor y recibirás soporte prioritario en Discord.')">Ver Detalles</button>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card h-100 bg-dark-secondary border-warning">
-                    <img src="assets/img/flny-vip-esmeralda.png" class="card-img-top" alt="VIP Esmeralda" />
+                    <img src="assets/img/flny-vip-oro.png" class="card-img-top" alt="VIP Oro" />
                     <div class="card-body d-flex flex-column text-white">
-                        <h5 class="card-title fw-bold">🗽 VIP Esmeralda</h5>
-                        <p class="card-text fs-4 fw-bold text-warning">$25.000 CLP / mes</p>
+                        <h5 class="card-title fw-bold">🗽 VIP Oro</h5>
+                        <p class="card-text fs-4 fw-bold text-warning">$15.000 CLP / mes</p>
                         <ul class="list-unstyled mt-3 mb-4">
-                            <li>✅ Todos los beneficios de Esmeralda.</li>
+                            <li>✅ Todos los beneficios de Plata.</li>
                             <li>✅ Acceso a todas las skins de armas.</li>
                             <li>✅ Posibilidad de crear tu propia banda.</li>
                             <li>✅ Soporte prioritario en Discord.</li>
                         </ul>
-                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails(
-                            'vip_esmerald', 'VIP Esmeralda', 25000, 'assets/img/flny-vip-esmeralda.png', 
-                            'El paquete definitivo. Obtén todos los beneficios de Esmeralda, además de acceso a todas las skins de armas, la habilidad para fundar tu propia banda dentro del servidor y recibirás soporte prioritario en Discord.'
-                        )">Ver Detalles</button>
+                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails('vip_gold', 'VIP Oro', 15000, 'assets/img/flny-vip-oro.png', 'El paquete definitivo. Obtén todos los beneficios de Plata, además de acceso a todas las skins de armas, la habilidad para fundar tu propia banda dentro del servidor y recibirás soporte prioritario en Discord.')">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-dark-secondary border-warning">
+                    <img src="assets/img/flny-vip-oro.png" class="card-img-top" alt="VIP Oro" />
+                    <div class="card-body d-flex flex-column text-white">
+                        <h5 class="card-title fw-bold">🗽 VIP Oro</h5>
+                        <p class="card-text fs-4 fw-bold text-warning">$15.000 CLP / mes</p>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>✅ Todos los beneficios de Plata.</li>
+                            <li>✅ Acceso a todas las skins de armas.</li>
+                            <li>✅ Posibilidad de crear tu propia banda.</li>
+                            <li>✅ Soporte prioritario en Discord.</li>
+                        </ul>
+                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails('vip_gold', 'VIP Oro', 15000, 'assets/img/flny-vip-oro.png', 'El paquete definitivo. Obtén todos los beneficios de Plata, además de acceso a todas las skins de armas, la habilidad para fundar tu propia banda dentro del servidor y recibirás soporte prioritario en Discord.')">Ver Detalles</button>
                     </div>
                 </div>
             </div>
@@ -164,24 +174,21 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-5">
-                            <img id="vipModalImage" src="" class="img-fluid rounded" alt="Imagen del VIP" />
-                        </div>
+                        <div class="col-md-5"><img id="vipModalImage" src="" class="img-fluid rounded" alt="Imagen del VIP" /></div>
                         <div class="col-md-7 d-flex flex-column">
                             <h3 id="vipModalName" class="fw-bold">Nombre del VIP</h3>
                             <p id="vipModalPrice" class="fs-4 text-warning fw-bold">Precio</p>
                             <p id="vipModalDescription" class="text-muted flex-grow-1">Descripción detallada de los beneficios.</p>
                             <hr class="border-secondary" />
-                            <div class="d-flex align-items-center">
-                                <label for="vipModalQuantity" class="form-label me-3 mb-0">Cantidad:</label>
-                                <input type="number" class="form-control bg-dark text-white border-secondary" id="vipModalQuantity" value="1" min="1" max="10" style="width: 80px" />
-                            </div>
+                            <div class="d-flex align-items-center"><label for="vipModalQuantity" class="form-label me-3 mb-0">Cantidad:</label><input type="number" class="form-control bg-dark text-white border-secondary" id="vipModalQuantity" value="1" min="1" max="10" style="width: 80px" /></div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-warning fw-bold" id="vipModalAddToCartButton">Añadir al Carro</button>
+                    <div id="recipient-input-group" class="me-auto d-none"><input type="text" id="recipient-username" class="form-control bg-dark text-white border-secondary" placeholder="Nombre de usuario del amigo"></div>
+                    <button type="button" class="btn btn-secondary" onclick="resetModalButtons()">Cerrar</button>
+                    <button type="button" class="btn btn-outline-light" id="gift-button" onclick="toggleGiftMode(true)">Regalar</button>
+                    <button type="button" class="btn btn-warning fw-bold" id="vipModalAddToCartButton">Añadir a mi Carro</button>
                 </div>
             </div>
         </div>
@@ -190,9 +197,7 @@
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-secondary">
             <p class="col-md-4 mb-0 text-muted-dark">© 2024 Flaites NY Roleplay</p>
-            <a href="index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-                <img src="assets/img/logo_tienda.png" alt="Logo Flaites NY" width="50" />
-            </a>
+            <a href="index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-decoration-none"><img src="assets/img/logo_tienda.png" alt="Logo Flaites NY" width="50" /></a>
             <ul class="nav col-md-4 justify-content-end">
                 <li class="nav-item"><a href="terminos.html" class="nav-link px-2 footer-link-simple">Términos</a></li>
                 <li class="nav-item"><a href="https://discord.com/tu-servidor" target="_blank" class="nav-link px-2 footer-link-simple" title="Discord"><i class="fab fa-discord fa-lg"></i></a></li>
@@ -206,23 +211,42 @@
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/notifications.js"></script>
     <script src="assets/js/auth.js"></script>
+    <script src="assets/js/app.js"></script>
     
     <script>
         const vipModalElement = document.getElementById('vipModal');
         if (vipModalElement) {
             const vipModal = new bootstrap.Modal(vipModalElement);
-            const vipModalAddToCartButton = document.getElementById('vipModalAddToCartButton');
-
+            const addToCartButton = document.getElementById('vipModalAddToCartButton');
+            const giftButton = document.getElementById('gift-button');
+            const recipientGroup = document.getElementById('recipient-input-group');
+            const recipientInput = document.getElementById('recipient-username');
+            function toggleGiftMode(isGifting) {
+                if (isGifting) {
+                    recipientGroup.classList.remove('d-none');
+                    giftButton.classList.add('active');
+                    addToCartButton.textContent = 'Añadir Regalo al Carro';
+                } else {
+                    recipientGroup.classList.add('d-none');
+                    giftButton.classList.remove('active');
+                    addToCartButton.textContent = 'Añadir a mi Carro';
+                    recipientInput.value = '';
+                }
+            }
+            function resetModalButtons() { toggleGiftMode(false); vipModal.hide(); }
+            vipModalElement.querySelector('.btn-close').addEventListener('click', resetModalButtons);
             function showVipDetails(id, name, price, image, description) {
                 document.getElementById('vipModalImage').src = image;
                 document.getElementById('vipModalName').textContent = name;
                 document.getElementById('vipModalPrice').textContent = `$${price.toLocaleString('es-CL')}`;
                 document.getElementById('vipModalDescription').textContent = description;
                 document.getElementById('vipModalQuantity').value = 1;
-                vipModalAddToCartButton.onclick = function() {
+                addToCartButton.onclick = function() {
                     const quantity = parseInt(document.getElementById('vipModalQuantity').value);
-                    addToCart(id, name, price, image, quantity);
-                    vipModal.hide();
+                    const recipient = recipientInput.value.trim() || null;
+                    if (recipient && recipient.length < 3) { return alert("El nombre de usuario del destinatario debe tener al menos 3 caracteres."); }
+                    addToCart(id, name, price, image, quantity, recipient);
+                    resetModalButtons();
                 };
                 vipModal.show();
             }

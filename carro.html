@@ -14,44 +14,61 @@
 </head>
 <body class="bg-dark text-white">
 
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
-        </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100"></div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-opacity-75 bg-dark border-bottom border-secondary sticky-top">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
-                <ul class="navbar-nav">
+
+            <div class="collapse navbar-collapse w-100" id="mainNav">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="catalogo.html">Tienda VIP</a></li>
                     <li class="nav-item"><a class="nav-link" href="normativas.html">Normativas</a></li>
                     <li class="nav-item"><a class="nav-link" href="https://discord.com/tu-servidor" target="_blank">Discord</a></li>
                 </ul>
-            </div>
-            <div class="d-flex align-items-center">
-                <div id="guest-container" class="d-flex align-items-center">
-                    <a href="login.html" class="me-3" title="Mi Cuenta"><img src="assets/img/login-user.png" alt="user" style="height: 24px" /></a>
+
+                <div class="d-flex align-items-center">
+                    <div id="guest-container">
+                        <a href="login.html" class="btn btn-outline-warning btn-sm">Iniciar Sesión</a>
+                    </div>
+
+                    <div id="user-container" class="dropdown" style="display: none;">
+                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-2"></i> Hola, <span id="username-span" class="fw-bold ms-1"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            <li><a class="dropdown-item" href="perfil.html">
+                                <i class="fas fa-history me-2"></i>Ver historial de compras
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <button class="dropdown-item text-danger" onclick="handleLogout()">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="carro.html" class="position-relative ms-3" title="Ver carro">
+                        <img src="assets/img/carrito-de-compras.png" alt="carro" style="height:24px;">
+                        <span id="cart-counter" class="cart-counter-badge">0</span>
+                    </a>
                 </div>
-                <div id="user-container" class="d-flex align-items-center" style="display: none;">
-                    <span class="navbar-text me-3">Hola, <span id="username-span" class="fw-bold"></span></span>
-                    <button class="btn btn-outline-danger btn-sm" onclick="handleLogout()">Salir</button>
-                </div>
-                <a href="carro.html" class="position-relative ms-3" title="Ver carro">
-                    <img src="assets/img/carrito-de-compras.png" alt="carro" style="height:24px;">
-                    <span id="cart-counter" class="cart-counter-badge">0</span>
-                </a>
             </div>
         </div>
     </nav>
 
     <main class="container my-5">
         <h2 class="text-center fw-bold mb-5 text-uppercase">Tu Carro de Compras</h2>
-        <div class="row">
+
+        <div class="row" id="cart-row">
             <div class="col-lg-8" id="cart-items-container">
                 </div>
-            <div class="col-lg-4">
+
+            <div class="col-lg-4" id="summary-col">
                 <div class="card bg-dark-secondary border-secondary sticky-top" style="top: 100px;">
                     <div class="card-body p-4">
                         <h4 class="card-title text-uppercase fw-bold mb-4">Resumen del Pedido</h4>
@@ -68,15 +85,31 @@
                             <div id="paypal-button-container"></div>
                             <div id="payment-message-container" class="text-center"></div>
                         </div>
+                            <hr class="border-secondary my-3">
+                            <p class="text-muted small text-center">-- Solo para desarrollo --</p>
+                            <div class="d-grid">
+                                <button class="btn btn-info btn-sm" onclick="handleTestPurchase()">
+                                    Simular Compra Exitosa
+                                </button>
+                        </div>
                     </div>
+                    
                 </div>
+            </div>
+        </div>
+
+        <div id="empty-cart-container" class="d-none">
+            <div class="text-center p-5 bg-dark-secondary rounded border border-secondary">
+                <h4 class="text-muted">Tu carro está vacío</h4>
+                <p>Parece que aún no has añadido ningún paquete VIP.</p>
+                <a href="index.html" class="btn btn-warning fw-bold mt-3">Volver a la Tienda</a>
             </div>
         </div>
     </main>
     
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-secondary">
-            <p class="col-md-4 mb-0 text-muted-dark">© 2024 Flaites NY Roleplay</p>
+            <p class="col-md-4 mb-0 text-muted-dark">© 2025 Flaites NY Roleplay</p>
             <a href="index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-decoration-none">
                 <img src="assets/img/logo_tienda.png" alt="Logo Flaites NY" width="50" />
             </a>
@@ -93,6 +126,7 @@
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/notifications.js"></script>
     <script src="assets/js/auth.js"></script>
+    <script src="assets/js/history.js"></script>
     
     <script src="https://www.paypal.com/sdk/js?client-id=AcecErknNJvoDLtDQcowhug1mwogi7GzHFfcYu0xxLxJAyRWGz87xojyGRZiQVmvBq28lN0gLxvDBmNe&currency=USD&disable-funding=credit,card"></script>
 
@@ -116,13 +150,13 @@
                     },
                     onApprove: function(data, actions) {
                         return actions.order.capture().then(function(details) {
-                            alert('¡Pago completado con éxito por ' + details.payer.name.given_name + '!');
+                            showNotification('¡Pago completado con éxito por ' + details.payer.name.given_name + '!');
                             clearCartAfterPayment();
                         });
                     },
                     onError: function(err) {
                         console.error('Ocurrió un error en el pago:', err);
-                        alert('El pago no pudo ser procesado. Por favor, inténtalo de nuevo.');
+                        ('El pago no pudo ser procesado. Por favor, inténtalo de nuevo.');
                     }
                 }).render('#paypal-button-container');
             }
