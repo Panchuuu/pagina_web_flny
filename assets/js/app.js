@@ -6,7 +6,7 @@ async function updateServerStatus() {
     if (!statusTextElement || !playersTextElement) { return; }
 
     try {
-        const response = await fetch('http://localhost:3002/server-status'); // Usando el puerto 3002
+        const response = await fetch('https://pagina-flny-rp.rj.r.appspot.com/server-status'); // Usando el puerto 3002
         const data = await response.json();
         if (data.online) {
             statusTextElement.textContent = 'Online';
@@ -38,7 +38,7 @@ async function loadProfileData() {
     if (!token) { window.location.href = 'login.html'; return; }
 
     try {
-        const response = await fetch('http://localhost:3002/api/profile', {
+        const response = await fetch('https://pagina-flny-rp.rj.r.appspot.com/api/profile', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error((await response.json()).message);

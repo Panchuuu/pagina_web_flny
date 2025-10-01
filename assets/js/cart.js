@@ -100,7 +100,7 @@ async function applyCoupon() {
     const couponMessage = document.getElementById('coupon-message');
     const code = couponInput.value;
     try {
-        const response = await fetch('http://localhost:3002/validate-coupon', {
+        const response = await fetch('https://pagina-flny-rp.rj.r.appspot.com/validate-coupon', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: code })
@@ -137,20 +137,36 @@ function clearCartAfterPayment() {
 }
 
 async function handleTestPurchase() {
+    // 1. Obtienes el token
     const token = localStorage.getItem('sessionToken');
-    if (!token) { return showNotification('Debes iniciar sesión para comprar.', 'danger'); }
-    const payload = JSON.parse(atob(token.split('.')[1])); 
-    const currentUser = payload.username;
+    if (!token) {
+        return showNotification('Debes iniciar sesión para comprar.', 'danger');
+    }
+
+    // (El resto de tu lógica está bien)
     const cart = JSON.parse(localStorage.getItem('flaitesNYCart')) || [];
-    if (cart.length === 0) { return showNotification('Tu carro está vacío.', 'info'); }
-    if (!confirm('¿Estás seguro de que quieres simular esta compra?')) { return; }
+    if (cart.length === 0) {
+        return showNotification('Tu carro está vacío.', 'info');
+    }
+    if (!confirm('¿Estás seguro de que quieres simular esta compra?')) {
+        return;
+    }
+
     try {
-        const response = await fetch('http://localhost:3002/create-test-order', {
+        const response = await fetch('https://pagina-flny-rp.rj.r.appspot.com/create-test-order', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cart, currentUser })
+            headers: {
+                'Content-Type': 'application/json',
+                // 2. CORRECCIÓN: Envías el token en la cabecera Authorization
+                'Authorization': `Bearer ${token}`
+            },
+            // NOTA: Tu backend ya obtiene el usuario desde el token, así que no necesitas enviar 'currentUser'
+            // en el body, pero no causa problemas si lo dejas.
+            body: JSON.stringify({ cart })
         });
+
         const data = await response.json();
+
         if (response.ok) {
             showNotification('¡Compra de prueba registrada con éxito!', 'success');
             clearCartAfterPayment();
