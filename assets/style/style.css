@@ -120,6 +120,9 @@ a:hover {
 .card-body .d-flex .text-warning {
     color: #ffc107 !important;
 }
+.card-body .d-flex .text-success {
+    color: #24ff07 !important;
+}
 
 /* Estilo para el texto de descuento y el botón "Quitar" */
 .text-success {
