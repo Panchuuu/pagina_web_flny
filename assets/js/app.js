@@ -1,5 +1,3 @@
-// assets/js/app.js (Versión Completa y Corregida)
-
 const API_URL = 'http://localhost:3002';
 
 async function updateServerStatus() {

@@ -1,5 +1,3 @@
-// assets/js/admin.js (Versión Final - Carga todo al inicio)
-
 const API_URL = 'http://localhost:3002';
 
 document.addEventListener('DOMContentLoaded', () => {

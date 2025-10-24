@@ -1,5 +1,3 @@
-// VERSIÓN FINAL: CON ROLES Y JWT
-
 const API_URL = 'http://localhost:3002';
 
 // --- MANEJADORES DE EVENTOS ---
@@ -7,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     handleAuthRedirect(); 
     initializeAuth();
 });
-
-// --- LÓGICA DE SESIÓN CON TOKEN (JWT) ---
 
 function handleAuthRedirect() {
     const params = new URLSearchParams(window.location.search);
