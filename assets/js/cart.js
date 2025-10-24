@@ -100,7 +100,7 @@ async function applyCoupon() {
     const couponMessage = document.getElementById('coupon-message');
     const code = couponInput.value;
     try {
-        const response = await fetch('https://pagina-flny-rp.rj.r.appspot.com/validate-coupon', {
+        const response = await fetch('https://localhost:3002/validate-coupon', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: code })
@@ -153,7 +153,7 @@ async function handleTestPurchase() {
     }
 
     try {
-        const response = await fetch('https://pagina-flny-rp.rj.r.appspot.com/create-test-order', {
+        const response = await fetch('https://localhost:3002/create-test-order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

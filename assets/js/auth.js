@@ -1,6 +1,6 @@
 // VERSIÓN FINAL: CON ROLES Y JWT
 
-const API_URL = 'https://pagina-flny-rp.rj.r.appspot.com';
+const API_URL = 'https://localhost:3002';
 
 // --- MANEJADORES DE EVENTOS ---
 document.addEventListener('DOMContentLoaded', () => {
