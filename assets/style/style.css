@@ -24,9 +24,6 @@ h1, h2, h3, h4, h5, .navbar-brand, .card-title {
     backdrop-filter: blur(10px);
 }
 
-.text-muted {
-    color: #a0a0a0 !important;
-}
 .nav-link {
     text-transform: uppercase;
     font-weight: bold;
@@ -122,9 +119,6 @@ a:hover {
 /* Forzar color amarillo en el precio total final */
 .card-body .d-flex .text-warning {
     color: #ffc107 !important;
-}
-.card-body .d-flex .text-success {
-    color: #24ff07 !important;
 }
 
 /* Estilo para el texto de descuento y el botón "Quitar" */

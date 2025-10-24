@@ -1,10 +1,19 @@
+// VERSIÓN FINAL: CON ROLES Y JWT
+
 const API_URL = 'http://localhost:3002';
 
 // --- MANEJADORES DE EVENTOS ---
 document.addEventListener('DOMContentLoaded', () => {
     handleAuthRedirect(); 
-    initializeAuth();
+    initializeAuth();     
+    
+    if (document.getElementById('linkAccountForm')) {
+        populateVincularPage();
+        document.getElementById('linkAccountForm').addEventListener('submit', handleCompleteRegistration);
+    }
 });
+
+// --- LÓGICA DE SESIÓN CON TOKEN (JWT) ---
 
 function handleAuthRedirect() {
     const params = new URLSearchParams(window.location.search);
@@ -105,4 +114,26 @@ async function handleCompleteRegistration(event) {
         messageEl.textContent = 'No se pudo conectar con el servidor.';
         messageEl.className = 'mt-3 small text-center text-danger';
     }
+}
+
+function populateVincularPage() {
+    const params = new URLSearchParams(window.location.search);
+    const discordId = params.get('discordId');
+    const username = params.get('username');
+    const avatar = params.get('avatar');
+
+    if (!discordId) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    document.getElementById('discordId').value = discordId;
+    document.getElementById('username').value = username;
+    document.getElementById('avatar').value = avatar;
+
+    const welcomeMessageContainer = document.getElementById('welcome-message');
+    welcomeMessageContainer.innerHTML = `
+        <img src="${avatar}" alt="Avatar de Discord" class="rounded-circle mb-3" style="width: 80px; height: 80px;">
+        <h4 class="text-uppercase">Bienvenido, ${username}</h4>
+    `;
 }

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3002';
+// assets/js/app.js (Versión Completa y Corregida)
 
 async function updateServerStatus() {
     const statusTextElement = document.getElementById('server-status-text');
@@ -6,7 +6,7 @@ async function updateServerStatus() {
     if (!statusTextElement || !playersTextElement) { return; }
 
     try {
-        const response = await fetch(`${API_URL}/server-status`);
+        const response = await fetch('http://localhost:3002/server-status'); // Usando el puerto 3002
         const data = await response.json();
         if (data.online) {
             statusTextElement.textContent = 'Online';
@@ -38,7 +38,7 @@ async function loadProfileData() {
     if (!token) { window.location.href = 'login.html'; return; }
 
     try {
-        const response = await fetch(`${API_URL}/api/profile`, {
+        const response = await fetch('http://localhost:3002/api/profile', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error((await response.json()).message);
