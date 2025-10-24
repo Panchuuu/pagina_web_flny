@@ -1,5 +1,7 @@
 // assets/js/admin.js (Versión Final - Carga todo al inicio)
 
+const API_URL = 'http://localhost:3002';
+
 document.addEventListener('DOMContentLoaded', () => {
     loadDashboardStats();
     loadUsers();
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadDashboardStats() {
     const token = localStorage.getItem('sessionToken');
     try {
-        const response = await fetch('https://localhost:3002/admin/stats', {
+        const response = await fetch(`${API_URL}/admin/stats`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error((await response.json()).message);
@@ -44,7 +46,7 @@ async function loadUsers() {
     if (!token) return;
 
     try {
-        const response = await fetch('https://localhost:3002/users', {
+        const response = await fetch(`${API_URL}/users`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -90,7 +92,7 @@ async function changeUserRole(userId, newRole) {
     }
     const token = localStorage.getItem('sessionToken');
     try {
-        const response = await fetch('https://localhost:3002/admin/users/set-role', {
+        const response = await fetch(`${API_URL}/admin/users/set-role`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +118,7 @@ async function loadAllOrders() {
     if (!tableBody) return;
     const token = localStorage.getItem('sessionToken');
     try {
-        const response = await fetch('https://localhost:3002/admin/orders', {
+        const response = await fetch(`${API_URL}/admin/orders`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error((await response.json()).message);
@@ -154,7 +156,7 @@ async function loadCoupons() {
     if (!tableBody) return;
     const token = localStorage.getItem('sessionToken');
     try {
-        const response = await fetch('https://localhost:3002/admin/coupons', {
+        const response = await fetch(`${API_URL}/admin/coupons`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error((await response.json()).message);
@@ -199,7 +201,7 @@ async function handleCreateCoupon(event) {
         expiry_date: form.querySelector('#couponExpiry').value || null
     };
     try {
-        const response = await fetch('https://localhost:3002/admin/coupons', {
+        const response = await fetch(`${API_URL}/admin/coupons`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify(payload)
@@ -218,7 +220,7 @@ async function toggleCouponStatus(id, currentStatus) {
     if (!confirm('¿Estás seguro de que quieres cambiar el estado de este cupón?')) return;
     const token = localStorage.getItem('sessionToken');
     try {
-        const response = await fetch('https://localhost:3002/admin/coupons/toggle', {
+        const response = await fetch(`${API_URL}/admin/coupons/toggle`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ id, currentStatus })
@@ -238,7 +240,7 @@ async function deleteCoupon(id) {
     }
     const token = localStorage.getItem('sessionToken');
     try {
-        const response = await fetch(`https://localhost:3002/admin/coupons/${id}`, {
+        const response = await fetch(`${API_URL}/admin/coupons/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
         });

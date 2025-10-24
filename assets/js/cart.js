@@ -1,4 +1,4 @@
-// VERSIÓN FINAL: CON LÓGICA DE REGALOS Y CUPONES DESDE EL BACKEND
+const API_URL = 'http://localhost:3002';
 
 function addToCart(id, name, price, image, quantity, recipient = null) {
     let cart = JSON.parse(localStorage.getItem('flaitesNYCart')) || [];
@@ -100,7 +100,7 @@ async function applyCoupon() {
     const couponMessage = document.getElementById('coupon-message');
     const code = couponInput.value;
     try {
-        const response = await fetch('https://localhost:3002/validate-coupon', {
+        const response = await fetch(`${API_URL}/validate-coupon`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: code })
@@ -153,7 +153,7 @@ async function handleTestPurchase() {
     }
 
     try {
-        const response = await fetch('https://localhost:3002/create-test-order', {
+        const response = await fetch(`${API_URL}/create-test-order`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
