@@ -2,6 +2,7 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #121212;
+    color: #e9ecef; /* Un blanco suave para todo el texto por defecto */
 }
 
 h1, h2, h3, h4, h5, .navbar-brand, .card-title {
@@ -10,16 +11,42 @@ h1, h2, h3, h4, h5, .navbar-brand, .card-title {
     text-transform: uppercase;
 }
 
-/* ---- COMPONENTES PRINCIPALES ---- */
+a {
+    color: #ffc107; /* Amarillo para los enlaces */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff; /* Blanco al pasar el mouse */
+    text-decoration: underline;
+}
+
+/* ---- HERO CON FONDO DE COLOR (PÁGINA DE INICIO) ---- */
 .hero-section {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-bottom: 2px solid #ffc107;
+  position: relative;
+  height: 80vh;
+  min-height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Usamos un gradiente sutil para darle profundidad */
+  background: linear-gradient(135deg, #f5cb12 0%, #1e1e1e 100%);
+  border-bottom: 3px solid #ffc107; /* Borde de acento amarillo */
 }
 
-.hero-section .lead {
-    color: #e0e0e0;
+/* ---- SECCIÓN DE CARACTERÍSTICAS (PÁGINA DE INICIO) ---- */
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  color: #ffc107;
 }
 
+/* ---- NAVEGACIÓN ---- */
 .navbar {
     backdrop-filter: blur(10px);
 }
@@ -35,6 +62,7 @@ h1, h2, h3, h4, h5, .navbar-brand, .card-title {
     color: #ffc107;
 }
 
+/* ---- TARJETAS (PÁGINA DE CATÁLOGO) ---- */
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-width: 2px;
@@ -53,19 +81,70 @@ h1, h2, h3, h4, h5, .navbar-brand, .card-title {
     padding-bottom: 0.5rem;
 }
 
-/* ---- FOOTER ---- */
-.text-muted-dark {
-    color: #a0a0a0;
+/* ---- GALERÍA (PÁGINA DE INICIO) ---- */
+.gallery-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 }
 
-.footer-link-simple {
-    color: #a0a0a0;
-    transition: color 0.3s ease;
+/* ---- PÁGINAS DE LOGIN/VINCULAR ---- */
+.auth-page {
+  background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.footer-link-simple:hover {
-    color: #ffc107;
+.auth-card {
+  background-color: rgba(30, 30, 30, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
+.auth-card .form-control {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: #444;
+}
+
+.auth-card .form-control:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+/* ---- FORMULARIOS Y COMPONENTES GENÉRICOS ---- */
+.form-control.bg-dark::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+/* Compatibilidad de placeholder con navegadores antiguos */
+.form-control.bg-dark::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.5); }
+.form-control.bg-dark::-moz-placeholder { color: rgba(255, 255, 255, 0.5); opacity: 1; }
+.form-control.bg-dark:-ms-input-placeholder { color: rgba(255, 255, 255, 0.5); }
+
+.badge {
+    padding: 0.5em 0.75em;
+    font-size: 0.8rem;
+}
+
+/* ---- PANEL DE ESTADO DEL SERVIDOR ---- */
+.server-status-panel {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-online { color: #28a745; font-weight: bold; }
+.status-offline { color: #dc3545; font-weight: bold; }
+.status-loading { color: #ffc107; }
 
 /* ---- CARRO DE COMPRAS Y CONTADOR ---- */
 .cart-item-img {
@@ -91,92 +170,12 @@ h1, h2, h3, h4, h5, .navbar-brand, .card-title {
     align-items: center;
 }
 
-/* ---- CORRECCIONES GLOBALES Y DE ESPECIFICIDAD DE COLORES ---- */
-body.bg-dark {
-    color: #e9ecef; /* Un blanco suave para todo el texto por defecto */
-}
-
-a {
-    color: #ffc107; /* Amarillo para los enlaces */
-    text-decoration: none;
-}
-
-a:hover {
-    color: #ffffff; /* Blanco al pasar el mouse */
-    text-decoration: underline;
-}
-
-/* Forzar color claro en los párrafos del resumen del carro */
-.card-body .d-flex p {
-    color: #adb5bd; /* Gris claro */
-}
-
-/* Forzar color blanco en el texto "TOTAL" que es más grueso */
-.card-body .d-flex .fw-bold {
-    color: #f8f9fa !important; /* Blanco, !important para asegurar que se aplique */
-}
-
-/* Forzar color amarillo en el precio total final */
-.card-body .d-flex .text-warning {
-    color: #ffc107 !important;
-}
-
-/* Estilo para el texto de descuento y el botón "Quitar" */
-.text-success {
-    color: #28a745 !important; /* Verde para el texto del cupón */
-}
-
-.btn-link.text-danger {
-    color: #dc3545 !important; /* Rojo para el botón "Quitar" */
-    text-decoration: none;
-}
-
-/* ---- CORRECCIÓN DE COLOR PARA LA DESCRIPCIÓN DEL MODAL ---- */
-.modal-body p.text-muted {
-    color: #adb5bd !important; /* Un gris claro, !important para asegurar el cambio */
-}
-
-.bg-dark-secondary .text-muted {
-    color: #adb5bd !important; /* Un gris claro. El !important es para darle máxima prioridad. */
-}
-
-/* ---- PANEL DE ESTADO DEL SERVIDOR ---- */
-.server-status-panel {
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.status-online {
-    color: #28a745; /* Verde */
-    font-weight: bold;
-}
-
-.status-offline {
-    color: #dc3545; /* Rojo */
-    font-weight: bold;
-}
-
-.status-loading {
-    color: #ffc107; /* Amarillo */
-}
-
-/* ======================================================= */
-/* ESTILOS PARA LA PÁGINA DE PERFIL */
-/* ======================================================= */
-
-/* Estilo mejorado para la tabla de historial */
+/* ---- ESTILOS DE TABLAS (PÁGINA DE PERFIL Y ADMIN) ---- */
 .table {
-    --bs-table-border-color: #444; /* Bordes de tabla más sutiles */
+    --bs-table-border-color: #444;
 }
 
 .table thead {
-    /* Línea de acento amarilla en la cabecera de la tabla */
     border-bottom: 3px solid #ffc107;
 }
 
@@ -187,40 +186,24 @@ a:hover {
 }
 
 .table tbody tr:hover {
-    /* Efecto de hover sutil para las filas de la tabla */
     background-color: rgba(255, 255, 255, 0.04);
 }
 
-
-.auth-page {
-    /* Fondo con imagen temática y un overlay oscuro */
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+/* ---- FOOTER ---- */
+.text-muted-dark {
+    color: #a0a0a0;
 }
 
-.auth-card {
-    /* Efecto "Glassmorphism" o cristal esmerilado */
-    background-color: rgba(30, 30, 30, 0.65);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem; /* Bordes más redondeados */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+.footer-link-simple {
+    color: #a0a0a0;
+    transition: color 0.3s ease;
 }
 
-.auth-card .form-control {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-color: #444;
+.footer-link-simple:hover {
+    color: #ffc107;
 }
 
-.auth-card .form-control:focus {
-    /* Efecto de foco con el color de acento amarillo */
-    border-color: #ffc107;
-    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
-}
-
-.badge {
-    padding: 0.5em 0.75em;
-    font-size: 0.8rem;
+/* ---- SOBREESCRITURAS DE COLOR (Helpers) ---- */
+.bg-dark-secondary .text-muted {
+    color: #adb5bd !important;
 }
