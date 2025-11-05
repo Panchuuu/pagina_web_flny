@@ -42,8 +42,13 @@ async function initializeAuth() {
         if (response.ok) {
             const userData = await response.json();
             checkLoginState(userData);
+
+            // Llamamos a las funciones que dependen del login aquí
             if (typeof loadProfileData === 'function') {
                 loadProfileData();
+            }
+            if (typeof fetchNotifications === 'function') {
+                fetchNotifications();
             }
         } else {
             handleLogout();

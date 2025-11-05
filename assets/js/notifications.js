@@ -1,8 +1,3 @@
-/**
- * Muestra una notificación toast de Bootstrap.
- * @param {string} message - El mensaje a mostrar.
- * @param {string} type - El tipo de notificación ('success', 'danger', 'info').
- */
 function showNotification(message, type = 'info') {
     const toastContainer = document.querySelector('.toast-container');
     if (!toastContainer) return;

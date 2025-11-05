@@ -22,10 +22,6 @@
              <img class="logoT mb-4" src="assets/img/logo_tienda.png" alt="Logo Flaites NY" style="max-height: 180px" data-aos="zoom-in" />
              <h1 class="display-3 fw-bold text-uppercase" data-aos="fade-up">Bienvenido a Flaites NY</h1>
              <p class="lead my-3" data-aos="fade-up" data-aos-delay="100">La comunidad de roleplay definitiva. Explora la ciudad, crea tu historia y vive una experiencia única.</p>
-             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center mt-4" data-aos="fade-up" data-aos-delay="200">
-                <a href="catalogo.html" class="btn btn-warning btn-lg px-4 gap-3 fw-bold">Visitar la Tienda</a>
-                <a href="https://discord.gg/T99hAzmP5A" target="_blank" class="btn btn-outline-light btn-lg px-4 fw-bold"><i class="fab fa-discord me-2"></i>Únete a Discord</a>
-            </div>
         </div>
     </header>
 
@@ -42,6 +38,15 @@
                 </ul>
                 <div class="d-flex align-items-center">
                     <div id="guest-container"><a href="login.html" class="btn btn-outline-warning btn-sm">Iniciar Sesión</a></div>
+                    <div id="notification-bell-container" class="dropdown" style="display: none;">
+                        <a href="#" class="nav-link position-relative me-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Notificaciones" onclick="markNotificationsAsRead()">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-dot" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle" style="display: none;"></span>
+                        </a>
+                        <ul id="notifications-list" class="dropdown-menu dropdown-menu-dark dropdown-menu-end" style="width: 300px;">
+                            <li><p class="dropdown-item text-muted text-center">No hay notificaciones</p></li>
+                        </ul>
+                    </div>
                     <div id="user-container" class="dropdown" style="display: none;">
                         <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle me-2"></i> Hola, <span id="username-span" class="fw-bold ms-1"></span>

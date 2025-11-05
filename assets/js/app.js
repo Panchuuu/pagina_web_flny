@@ -30,6 +30,81 @@ const ROLE_ID_TO_NAME = {
     ['1383142605411324042']: "VIP Oro"
 };
 
+async function fetchNotifications() {
+    const token = localStorage.getItem('sessionToken');
+    if (!token) return;
+
+    try {
+        const response = await fetch('http://localhost:3002/api/notifications', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (response.ok) {
+            const notifications = await response.json();
+            updateNotificationUI(notifications);
+        }
+    } catch (error) {
+        console.error('Error al obtener notificaciones:', error);
+    }
+}
+
+function updateNotificationUI(notifications) {
+    const bellContainer = document.getElementById('notification-bell-container');
+    const dot = document.getElementById('notification-dot');
+    const list = document.getElementById('notifications-list');
+
+    if (!bellContainer || !dot || !list) return;
+
+    // Mostrar el contenedor de la campana si el usuario está logueado
+    bellContainer.style.display = 'block';
+    
+    list.innerHTML = ''; // Limpiar la lista
+
+    const unreadNotifications = notifications.filter(n => n.is_read === 0);
+
+    if (unreadNotifications.length > 0) {
+        dot.style.display = 'block'; // Mostrar el punto rojo
+    } else {
+        dot.style.display = 'none'; // Ocultar el punto rojo
+    }
+
+    if (notifications.length === 0) {
+        list.innerHTML = '<li><p class="dropdown-item-text text-muted text-center small my-2">No tienes notificaciones.</p></li>';
+    } else {
+        notifications.forEach(n => {
+            const isUnread = n.is_read === 0 ? 'fw-bold' : 'text-muted';
+            const date = new Date(n.created_at).toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+            
+            list.innerHTML += `
+                <li>
+                    <div class="dropdown-item-text text-white p-2" style="white-space: normal;">
+                        <p class="mb-1 small ${isUnread}">${n.message}</p>
+                        <small class="text-muted">${date}</small>
+                    </div>
+                </li>
+            `;
+        });
+    }
+}
+
+async function markNotificationsAsRead() {
+    const dot = document.getElementById('notification-dot');
+    // Solo enviar la petición si hay notificaciones sin leer
+    if (dot && dot.style.display === 'block') {
+        const token = localStorage.getItem('sessionToken');
+        if (!token) return;
+
+        try {
+            await fetch('http://localhost:3002/api/notifications/mark-read', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            dot.style.display = 'none'; // Ocultar el punto inmediatamente
+        } catch (error) {
+            console.error('Error al marcar notificaciones como leídas:', error);
+        }
+    }
+}
+
 async function loadProfileData() {
     const profileContent = document.getElementById('profile-content');
     if (!profileContent) return; // Salir si no estamos en la página de perfil
@@ -90,5 +165,4 @@ async function loadProfileData() {
 // Listener principal que llama a las funciones necesarias
 document.addEventListener('DOMContentLoaded', () => {
     updateServerStatus();
-    loadProfileData();
 })

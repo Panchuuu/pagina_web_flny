@@ -24,7 +24,7 @@ a:hover {
 /* ---- HERO CON FONDO DE COLOR (PÁGINA DE INICIO) ---- */
 .hero-section {
   position: relative;
-  height: 80vh;
+  height: 30vh;
   min-height: 500px;
   width: 100%;
   display: flex;
