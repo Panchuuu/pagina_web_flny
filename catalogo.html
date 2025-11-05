@@ -30,7 +30,6 @@
                 </ul>
                 <div class="d-flex align-items-center">
                     <div id="guest-container"><a href="login.html" class="btn btn-outline-warning btn-sm">Iniciar Sesión</a></div>
-                    
                     <div id="notification-bell-container" class="dropdown" style="display: none;">
                         <a href="#" class="nav-link position-relative me-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Notificaciones" onclick="markNotificationsAsRead()">
                             <i class="fas fa-bell"></i>
@@ -40,7 +39,6 @@
                             <li><p class="dropdown-item text-muted text-center">No hay notificaciones</p></li>
                         </ul>
                     </div>
-                    
                     <div id="user-container" class="dropdown" style="display: none;">
                         <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle me-2"></i> Hola, <span id="username-span" class="fw-bold ms-1"></span>
@@ -51,7 +49,6 @@
                             <li><button class="dropdown-item text-danger" onclick="handleLogout()"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</button></li>
                         </ul>
                     </div>
-                    
                     <a href="carro.html" class="position-relative ms-3" title="Ver carro"><img src="assets/img/carrito-de-compras.png" alt="carro" style="height:24px;"><span id="cart-counter" class="cart-counter-badge">0</span></a>
                 </div>
             </div>
@@ -64,15 +61,56 @@
             <p class="lead text-white-50">Adquiere un paquete para apoyar al servidor y obtener beneficios exclusivos.</p>
         </div>
         
-        <div id="product-list-container">
-            <div id="store-loading-spinner" class="text-center">
-                <div class="spinner-border text-warning" role="status" style="width: 3rem; height: 3rem;">
-                    <span class="visually-hidden">Cargando productos...</span>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col" data-aos="fade-up">
+                <div class="card h-100 bg-dark-secondary border-secondary">
+                    <img src="assets/img/flny-vip-bronce.png" class="card-img-top" alt="VIP Bronce" />
+                    <div class="card-body d-flex flex-column text-white">
+                        <h5 class="card-title fw-bold">🗽 VIP Bronce</h5>
+                        <p class="card-text fs-4 fw-bold text-warning">$5.000 CLP / mes</p>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>✅ Fila de prioridad en el servidor.</li>
+                            <li>✅ Acceso a vehículos exclusivos (Nivel 1).</li>
+                            <li>✅ Salario aumentado en un 10%.</li>
+                            <li>✅ Kit de bienvenida mensual.</li>
+                        </ul>
+                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails('vip_bronze', 'VIP Bronce', 5000, 'assets/img/flny-vip-bronce.png', 'Obtén beneficios iniciales...')">Ver Detalles</button>
+                    </div>
                 </div>
-                <p class="lead mt-2">Cargando productos...</p>
+            </div>
+            <div class="col" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 bg-dark-secondary border-primary">
+                    <img src="assets/img/flny-vip-plata.png" class="card-img-top" alt="VIP Plata" />
+                    <div class="card-body d-flex flex-column text-white">
+                        <h5 class="card-title fw-bold">🗽 VIP Plata</h5>
+                        <p class="card-text fs-4 fw-bold text-primary">$10.000 CLP / mes</p>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>✅ Todos los beneficios de Bronce.</li>
+                            <li>✅ Acceso a vehículos exclusivos (Nivel 2).</li>
+                            <li>✅ Customización de personaje avanzada.</li>
+                            <li>✅ Acceso a canal de Discord para VIPs.</li>
+                        </ul>
+                        <button class="btn btn-outline-primary fw-bold mt-auto" onclick="showVipDetails('vip_silver', 'VIP Plata', 10000, 'assets/img/flny-vip-plata.png', 'Incluye todos los beneficios de Bronce...')">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 bg-dark-secondary border-warning">
+                    <img src="assets/img/flny-vip-oro.png" class="card-img-top" alt="VIP Oro" />
+                    <div class="card-body d-flex flex-column text-white">
+                        <h5 class="card-title fw-bold">🗽 VIP Oro</h5>
+                        <p class="card-text fs-4 fw-bold text-warning">$15.000 CLP / mes</p>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>✅ Todos los beneficios de Plata.</li>
+                            <li>✅ Acceso a todas las skins de armas.</li>
+                            <li>✅ Posibilidad de crear tu propia banda.</li>
+                            <li>✅ Soporte prioritario en Discord.</li>
+                        </ul>
+                        <button class="btn btn-outline-warning fw-bold mt-auto" onclick="showVipDetails('vip_gold', 'VIP Oro', 15000, 'assets/img/flny-vip-oro.png', 'El paquete definitivo...')">Ver Detalles</button>
+                    </div>
+                </div>
             </div>
         </div>
-        
     </main>
 
     <div class="modal fade" id="vipModal" tabindex="-1" aria-hidden="true">
@@ -106,14 +144,14 @@
     </div>
     
     <div class="container">
-       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-secondary">
-           <p class="col-md-4 mb-0 text-muted-dark">© 2025 Flaites NY Roleplay</p>
-           <a href="index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-decoration-none"><img src="assets/img/logo_tienda.png" alt="Logo Flaites NY" width="50" /></a>
-           <ul class="nav col-md-4 justify-content-end">
-               <li class="nav-item"><a href="terminos.html" class="nav-link px-2 footer-link-simple">Términos</a></li>
-               <li class="nav-item"><a href="https://discord.com/tu-servidor" target="_blank" class="nav-link px-2 footer-link-simple"><i class="fab fa-discord fa-lg"></i></a></li>
-           </ul>
-       </footer>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-secondary">
+            <p class="col-md-4 mb-0 text-muted-dark">© 2025 Flaites NY Roleplay</p>
+            <a href="index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-decoration-none"><img src="assets/img/logo_tienda.png" alt="Logo Flaites NY" width="50" /></a>
+            <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item"><a href="terminos.html" class="nav-link px-2 footer-link-simple">Términos</a></li>
+                <li class="nav-item"><a href="https://discord.com/tu-servidor" target="_blank" class="nav-link px-2 footer-link-simple"><i class="fab fa-discord fa-lg"></i></a></li>
+            </ul>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -121,8 +159,7 @@
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/notifications.js"></script>
     <script src="assets/js/auth.js"></script>
-    
-    <script>
+<script>
         AOS.init({
             duration: 800,
             once: true,
@@ -149,7 +186,7 @@
                     giftButton.classList.remove('active');
                     addToCartButton.textContent = 'Añadir a mi Carro';
                     recipientInput.value = '';
-                    resultsList.innerHTML = '';
+                    resultsList.innerHTML = ''; // Limpiar resultados al cerrar
                 }
             }
 
@@ -164,49 +201,53 @@
                 document.getElementById('vipModalImage').src = image;
                 document.getElementById('vipModalName').textContent = name;
                 document.getElementById('vipModalPrice').textContent = `$${price.toLocaleString('es-CL')}`;
-                document.getElementById('vipModalDescription').textContent = description || 'Este producto no tiene una descripción detallada.';
+                document.getElementById('vipModalDescription').textContent = description;
                 document.getElementById('vipModalQuantity').value = 1;
-                
                 addToCartButton.onclick = function() {
                     const quantity = parseInt(document.getElementById('vipModalQuantity').value);
                     const recipient = recipientInput.value.trim() || null;
-                    if (recipient && recipient.length < 3) { 
-                        return alert("El nombre de usuario del destinatario debe tener al menos 3 caracteres."); 
-                    }
+                    if (recipient && recipient.length < 3) { return alert("El nombre de usuario del destinatario debe tener al menos 3 caracteres."); }
                     addToCart(id, name, price, image, quantity, recipient);
                     resetModalButtons();
                 };
                 vipModal.show();
             }
             
-            // --- LÓGICA DE BÚSQUEDA DE USUARIOS ---
+            // --- NUEVA LÓGICA DE BÚSQUEDA DE USUARIOS ---
+
+            // Función para mostrar los resultados
             function displaySearchResults(users) {
-                resultsList.innerHTML = ''; 
+                resultsList.innerHTML = ''; // Limpiar resultados anteriores
                 if (users.length === 0) {
                     resultsList.innerHTML = '<span class="list-group-item list-group-item-dark text-muted">No se encontraron usuarios.</span>';
                     return;
                 }
+
                 users.forEach(user => {
                     const item = document.createElement('a');
                     item.href = '#';
                     item.className = 'list-group-item list-group-item-action bg-dark-secondary text-white d-flex align-items-center';
                     item.innerHTML = `<img src="${user.avatar}" class="rounded-circle me-2" width="30" height="30"> ${user.username}`;
+                    
+                    // Al hacer clic en un usuario, se rellena el campo y se oculta la lista
                     item.addEventListener('click', (e) => {
                         e.preventDefault();
                         recipientInput.value = user.username;
                         resultsList.innerHTML = '';
                     });
+                    
                     resultsList.appendChild(item);
                 });
             }
 
             recipientInput.addEventListener('input', () => {
                 const searchTerm = recipientInput.value.trim();
-                resultsList.innerHTML = '';
-                clearTimeout(debounceTimer); 
+                resultsList.innerHTML = ''; // Limpiar inmediatamente
+                
+                clearTimeout(debounceTimer); // Cancelar el temporizador anterior
 
                 if (searchTerm.length < 2) {
-                    return;
+                    return; // No buscar si es muy corto
                 }
 
                 debounceTimer = setTimeout(async () => {
@@ -214,11 +255,9 @@
                         const token = localStorage.getItem('sessionToken');
                         if (!token) return;
 
-                        // --- ¡CORRECCIÓN AQUÍ! ---
                         const response = await fetch(`http://localhost:3002/api/users/search?term=${searchTerm}`, {
                             headers: { 'Authorization': `Bearer ${token}` }
                         });
-                        // --- FIN DE LA CORRECCIÓN ---
 
                         if (response.ok) {
                             const users = await response.json();
@@ -230,89 +269,12 @@
                 }, 300);
             });
             
+            // Ocultar resultados si se hace clic fuera
             document.addEventListener('click', (e) => {
                 if (!recipientGroup.contains(e.target)) {
                     resultsList.innerHTML = '';
                 }
             });
-        }
-        
-        // --- SCRIPT PARA CARGAR PRODUCTOS ---
-        document.addEventListener('DOMContentLoaded', loadProducts);
-
-        async function loadProducts() {
-            const container = document.getElementById('product-list-container');
-            const spinner = document.getElementById('store-loading-spinner');
-            
-            try {
-                // --- ¡CORRECCIÓN AQUÍ! ---
-                // Añade la URL completa de tu backend
-                const response = await fetch('http://localhost:3002/api/products');
-                // --- FIN DE LA CORRECCIÓN ---
-
-                if (!response.ok) {
-                    throw new Error('No se pudieron cargar los productos. ¿Está el backend (server.js) corriendo?');
-                }
-                
-                const categories = await response.json();
-                container.innerHTML = '';
-
-                if (Object.keys(categories).length === 0) {
-                    container.innerHTML = '<p class="text-center text-muted lead">No hay productos disponibles en la tienda en este momento.</p>';
-                    return;
-                }
-
-                for (const categoryName in categories) {
-                    const products = categories[categoryName];
-                    const categoryTitle = document.createElement('h2');
-                    categoryTitle.className = 'text-uppercase fw-bold text-warning mb-4';
-                    categoryTitle.textContent = categoryName;
-                    container.appendChild(categoryTitle);
-
-                    const row = document.createElement('div');
-                    row.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5';
-
-                    products.forEach(product => {
-                        const col = document.createElement('div');
-                        col.className = 'col';
-                        col.setAttribute('data-aos', 'fade-up');
-                        const benefitsHtml = product.benefits_list.split('\n').map(benefit => `<li>${benefit.trim()}</li>`).join('');
-                        const safeDescription = product.description.replace(/'/g, "\\'");
-
-                        col.innerHTML = `
-                            <div class="card h-100 bg-dark-secondary ${product.border_color}">
-                                <img src="${product.image_url}" class="card-img-top" alt="${product.name}" />
-                                <div class="card-body d-flex flex-column text-white">
-                                    <h5 class="card-title fw-bold">${product.name}</h5>
-                                    <p class="card-text fs-4 fw-bold text-warning">$${product.price.toLocaleString('es-CL')} CLP / mes</p>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        ${benefitsHtml}
-                                    </ul>
-                                    <button 
-                                        class="btn btn-outline-warning fw-bold mt-auto" 
-                                        onclick="showVipDetails(
-                                            '${product.product_key}', 
-                                            '${product.name}', 
-                                            ${product.price}, 
-                                            '${product.image_url}', 
-                                            '${safeDescription}'
-                                        )">
-                                        Ver Detalles
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        row.appendChild(col);
-                    });
-                    
-                    container.appendChild(row);
-                }
-                AOS.refresh();
-            } catch (error) {
-                console.error('Error al cargar productos:', error);
-                if (spinner) spinner.remove();
-                container.innerHTML = `<p class="text-center text-danger lead">${error.message}</p>`;
-            }
         }
     </script>
 </body>
